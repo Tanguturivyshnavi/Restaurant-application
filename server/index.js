@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const { v3: uuidv3 } = require("uuid");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -33,17 +33,7 @@ app.listen(process.env.PORT_NUMBER, () => {
   console.log("Server connected");
 });
 
-// Input validation middleware
-app.get("/",function(req,res){
-  res.sendFile(
-    path.join(__dirname,"../client/build/index.html"),
-    function(err){
-      if(err){
-        res.status(500).send(err);
-      }
-    }
-  )
-})
+
 const validateSignupInput = (req, res, next) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
@@ -83,7 +73,7 @@ app.post("/login", async (req, res) => {
   try {
     const user = await usertable.findOne({ email: email });
     if (user.role === "user") {
-      if (!user || !(await bcrypt.compare(password, user.password))) {
+      if (!user || !(password==user.password)) {
         return res.status(401).json({ error: "Incorrect email or password." });
       }
 
@@ -334,8 +324,9 @@ app.post("/adminLogin", async (req, res) => {
         .status(401)
         .json({ error: "Incorrect ecedvedvmail or password." });
     }
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (isPasswordCorrect) {
+    
+    
+    if (password=user.password) {
       return res.status(200).json({ error: "Success" });
     } else {
       return res.status(401).json({ error: "Incorrect email or password." });

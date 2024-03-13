@@ -37,7 +37,7 @@ const Restaurant = () => {
         console.log(category)
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [data]);
 
   const navigate = useNavigate(); // Initialize useHistory
 

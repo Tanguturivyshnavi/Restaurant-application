@@ -44,9 +44,10 @@ const ProfilePage = () => {
       navigate("/login");
       window.location.reload();
   }
+  const c=Cookies.get("jwtToken")
   useEffect(()=>{
     
-      const c=Cookies.get("jwtToken")
+      
       setCookie(c)
        setCookie(cookie)
     axios.post(`${process.env.REACT_APP_SERVER_URL}/profile`,
@@ -62,7 +63,7 @@ const ProfilePage = () => {
         setShowProfile(true)
 
     }).catch(err=>setShowProfile(false))
-  })
+  },[c])
   
   return (
     <Layout >

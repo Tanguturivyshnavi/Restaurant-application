@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import { Result, TimePicker } from "antd";
+import { TimePicker } from "antd";
 import Select from "@mui/material/Select";
 import "../styles/AddRestaurant.css";
 import {
@@ -126,7 +126,6 @@ const AddResturant = () => {
     addResturantOrBranch,
     restaurantOwner,
     restaurantName,
-    contactNumber1,
     emailId,
     bannerImage,
     address,
